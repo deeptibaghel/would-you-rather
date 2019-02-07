@@ -13,7 +13,7 @@ class Leaderboard extends Component {
                 <div>
                     <h1 >Leaderboard</h1>
                     {usersId.map((id) =>
-                        <div className='question'>
+                        <div key={id} className='question'>
                             <img
                                 src={users[id].avatarURL}
                                 alt={`Avatar of ${users[id].name}`}

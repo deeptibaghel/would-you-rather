@@ -100,6 +100,15 @@ li {
   margin: 2 px;
 }
 
+.section {
+  width: 100%;
+  max-width: 790px;
+  padding: 10px;
+  margin: 0 auto;
+  border: 1px solid #dad7d7;
+  border-radius: 3px;
+}
+
 .question {
   width: 100%;
   max-width: 590px;
@@ -202,7 +211,14 @@ li {
   margin:0 0 0 30px;
 }
 
-
 .name{
   font-family:"Helvetica Neue";
+}
+
+.selectedOption {
+  color: #00b5d6;
+}
+
+.title{
+  font-weight:bold;
 }

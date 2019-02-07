@@ -30,23 +30,30 @@ class Question extends Component {
         dispatch(handleAnswerQuestion(question.id, "optionTwo"))
     }
     render() {
-        const { notAsked, isAnswered, question } = this.props
+        const { notAsked, isAnswered, question, author } = this.props
         if (notAsked) {
             return <ErrorPage />
         }
 
         return (
 
-            <Link to={`/question/${question.id}`} >
+            <div>
                 <div className='container'>
                     <NavBar />
                 </div>
-                <div className='question'>
-                    <p  >
-                        Would you rather
-                  </p>
+                <div className='section'>
+                  <div className='title'>
+                    {author.name} asked
+                  </div>
                     <hr />
                     <div className='question-icons'>
+                        <span>
+                            <img
+                              src={author.avatarURL}
+                              alt={`Avatar of ${author.name}`}
+                              className='avatar'
+                            />
+                        </span>
                         {isAnswered === true ?
                             <div className='answers'>
                                 <button className={this.findSelectedOption()
@@ -61,8 +68,8 @@ class Question extends Component {
                                         {question.optionOne.votes.length} votes
                                     </div>
                                 </button>
-                                <div className='options'>Or </div>
-                                <button className={this.findSelectedOption() === "optionOne" ? "options" : "options selectedButton"}>
+                                <div className='options'>OR </div>
+                                <button className={this.findSelectedOption() === "optionOne" ? "options" : "options selectedOption"}>
                                     <div>
                                         {question.optionTwo.text}
                                     </div>
@@ -91,20 +98,20 @@ class Question extends Component {
                         }
                     </div>
                 </div>
-            </Link>
+            </div>
         )
     }
 }
 
 function mapStateToProps({ authedUser, users, questions }, props) {
     const { questionId } = props.computedMatch.params
-
     return {
         authedUser,
         users: Object.keys(users).map(key => { return users[key] }),
         isAnswered: authedUser === '' ? false : users[authedUser].answers.hasOwnProperty(questionId),
         notAsked: !questions.hasOwnProperty(questionId),
-        question: questions[questionId]
+        question: questions[questionId],
+        author: users[questions[questionId].author]
     }
 }
 export default connect(mapStateToProps)(Question)
