@@ -45,7 +45,9 @@ class Question extends Component {
                   <div className='title'>
                     {author.name} asked
                   </div>
+                  <div><p>Would you rather</p></div>
                     <hr />
+
                     <div className='question-icons'>
                         <span>
                             <img
@@ -54,6 +56,7 @@ class Question extends Component {
                               className='avatar'
                             />
                         </span>
+
                         {isAnswered === true ?
                             <div className='answers'>
                                 <button className={this.findSelectedOption()
